@@ -5,7 +5,7 @@ const BannerWrapper = styled.div`
   background-image: url("/images/banner.png");
   background-repeat: no-repeat;
   background-size: cover;
-  width: 100%;
+  width: 1216px;
   border-radius: 8px;
   background-position: right;
 
@@ -15,6 +15,8 @@ const BannerWrapper = styled.div`
 
   @media (min-width: 768px) {
     height: 700px;
+    align-items: center;
+    margin-left: 26px;
     background-position: center;
   }
 `;

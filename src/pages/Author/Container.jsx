@@ -1,5 +1,6 @@
 import Card from "../../components/Card";
 import styled from "styled-components";
+import { Carddata } from "../../utils/constants";
 
 // Styled components
 const ContainerWrapper = styled.div`
@@ -26,14 +27,9 @@ function Container() {
     <ContainerWrapper>
       <Title>Latest Post</Title>
       <CardsGrid>
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+        {Carddata.map((card, index) => (
+          <Card key={index} cardData={card} darkMode={false} />
+        ))}
       </CardsGrid>
     </ContainerWrapper>
   );

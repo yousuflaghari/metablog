@@ -7,25 +7,28 @@ const BlogWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
-  margin-top: 2.5rem;
+  gap: 8px;
+  margin-top: 24px;
 `;
 
 const PageTitle = styled.h1`
   color: ${({ theme }) => theme.text};
   font-weight: bold;
   font-size: 24px;
+  margin: 0px;
 `;
 
 const Breadcrumbs = styled.ul`
   display: flex;
+  padding: 0px;
+  margin: 0px;
   align-items: center;
-  gap: 1rem;
+  gap: 12px;
 `;
 
 const BreadcrumbItem = styled.li`
+  list-style: none;
   color: ${({ theme }) => theme.text};
-  opacity: 0.7;
 `;
 
 const BannerWrapper = styled.div`
@@ -43,11 +46,11 @@ const BannerWrapper = styled.div`
 const BannerContent = styled.div`
   position: absolute;
   top: 25%;
-  left: 6px;
+  left: 10px;
 
   @media (min-width: 640px) {
     top: 50%;
-    left: 10px;
+    left: 40px;
   }
 `;
 
@@ -129,7 +132,7 @@ function Blog() {
             </BannerTitle>
 
             <AuthorInfo>
-              <AuthorImage src="/images/Image (8).png" alt="Author" />
+              <AuthorImage src="/Images/author1.png" alt="Author" />
               <AuthorName>Jason Francisco</AuthorName>
               <PublishDate>October 22, 2024</PublishDate>
             </AuthorInfo>

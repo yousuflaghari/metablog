@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-// Styled component for the banner wrapper
 const BannerWrapper = styled.div`
   height: 250px;
   background: url("/images/banner.png") no-repeat center right;
@@ -18,8 +17,8 @@ const BannerWrapper = styled.div`
   }
 `;
 
-function Banner({ children }) {
+const Banner = ({ children }) => {
   return <BannerWrapper>{children}</BannerWrapper>;
-}
+};
 
 export default Banner;

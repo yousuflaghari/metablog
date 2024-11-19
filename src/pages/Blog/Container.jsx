@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import Card from "../../components/Card";
+import { Carddata } from "../../utils/constants";
 
 // Styled components
 const ContainerWrapper = styled.div`
@@ -41,12 +42,12 @@ const LoadMoreWrapper = styled.div`
 `;
 
 const LoadMoreButton = styled.button`
-  border: 1px solid #d1d5db; /* Tailwind's gray-light */
+  border: 1px solid #d1d5db;
   opacity: 0.5;
   color: ${({ theme }) => theme.text};
   font-size: 16px;
   padding: 0.5rem 1rem;
-  border-radius: 0.375rem; /* Tailwind's rounded-md */
+  border-radius: 0.375rem;
 
   &:hover {
     opacity: 1;
@@ -57,14 +58,9 @@ function Container() {
   return (
     <ContainerWrapper>
       <GridWrapper>
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
-        <Card />
+        {Carddata.map((card, index) => (
+          <Card key={index} cardData={card} darkMode={false} />
+        ))}
       </GridWrapper>
       <LoadMoreWrapper>
         <LoadMoreButton>Load More</LoadMoreButton>

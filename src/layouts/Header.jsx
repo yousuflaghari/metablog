@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Navbar = styled.nav`
   display: flex;
+  width: 100%;
   flex-direction: column;
   padding-top: 96px;
   padding-bottom: 32px;
@@ -27,19 +28,11 @@ const Navlink = styled(Link)`
   text-decoration: none;
   font-size: 18px;
   color: ${(props) => (props.darkMode ? "#ffffff" : "#000000")};
-  opacity: ${(props) => (props.active ? 1 : 0.5)};
-  padding-right: 12px;
-  padding-left: 12px;
-  transition: opacity 0.3s ease-in-out;
-
-  &:hover {
-    opacity: 1;
-    font-weight: bold;
-  }
 `;
 
 const LogoContainer = styled.div`
   display: flex;
+  flex: 1;
   align-items: center;
   gap: 8px;
   margin-bottom: 16px;
@@ -63,19 +56,18 @@ const Menu = styled.ul`
   display: ${(props) => (props.isOpen ? "flex" : "none")};
   flex-direction: column;
   flex: 3;
+  align-items: center;
   justify-content: center;
-  gap: 8px;
   position: absolute;
+  padding: 0px;
   top: 128px;
-  width: 100%;
   background-color: ${(props) => (props.darkMode ? "#0c0c0c" : "#87ceeb")};
   border-radius: 0 0 12px 12px;
-  transition: top 0.7s ease-in-out;
 
   @media (min-width: 768px) {
     display: flex;
     flex-direction: row;
-    gap: 8px;
+    gap: 32px;
     position: static;
     background-color: transparent;
     top: initial;
@@ -85,43 +77,58 @@ const Menu = styled.ul`
 const MenuItem = styled.li`
   font-size: 20px;
   color: ${(props) => (props.active ? "#000000" : "#ffffff")};
-  opacity: ${(props) => (props.active ? 1 : 0.5)};
-  padding-right: 12px;
-  padding-left: 12px;
-  transition: opacity 0.3s ease-in-out;
-
-  &:hover {
-    opacity: 1;
-  }
 `;
 
 const SearchContainer = styled.div`
   position: relative;
   width: 166px;
   height: 36px;
-  flex: 1;
-  max-width: 240px;
+  display: flex;
+  padding: 0px;
+  align-items: center;
+  border: 1px solid ${(props) => (props.darkMode ? "#ffffff" : "#000000")};
+  border-radius: 8px;
+  background-color: ${(props) => (props.darkMode ? "#333333" : "#f6f6f7")};
+`;
 
-  input {
-    padding-left: 16px;
-    padding-right: 40px;
-    width: 100%;
-    padding-top: 4px;
-    padding-bottom: 4px;
-    border-radius: 8px;
-    background-color: ${(props) => (props.darkMode ? "#333333" : "#f6f6f7")};
-    border: 1px solid ${(props) => (props.darkMode ? "#ffffff" : "#000000")};
-    color: ${(props) => (props.darkMode ? "#ffffff" : "#000000")};
-    outline: none;
-  }
+const SearchInput = styled.input`
+  flex: 1;
+  height: 100%;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  background-color: transparent;
+  color: ${(props) => (props.darkMode ? "#ffffff" : "#000000")};
+  outline: none;
+`;
+
+const SearchIcon = styled.div`
+  position: absolute;
+  right: 12px;
+  color: ${(props) => (props.darkMode ? "#ffffff" : "#999999")};
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   svg {
-    position: absolute;
-    top: 50%;
-    right: 12px;
-    transform: translateY(-50%);
-    color: ${(props) => (props.darkMode ? "#ffffff" : "#999999")};
+    width: 18px;
+    height: 18px;
   }
+`;
+
+const HeaderContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+`;
+
+const ThemeButtonContainer = styled.div`
+  display: flex;
+  flex: 1;
+  width: 256px;
+  height: 36px;
+  align-items: center;
+  gap: 12px;
 `;
 
 function Header() {
@@ -134,7 +141,7 @@ function Header() {
   };
 
   return (
-    <div>
+    <HeaderContainer>
       <Navbar darkMode={darkMode}>
         <LogoContainer darkMode={darkMode}>
           <img src={`/images/Logo.png`} alt="Logo" className="w-10" />
@@ -170,16 +177,17 @@ function Header() {
           </MenuItem>
         </Menu>
 
-        <div className="flex items-center gap-2">
+        <ThemeButtonContainer>
           <SearchContainer darkMode={darkMode}>
-            <input type="search" placeholder="Search..." />
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
+            <SearchInput darkMode={darkMode} placeholder="Search..." />
+            <SearchIcon darkMode={darkMode}>
+              <FontAwesomeIcon icon={faMagnifyingGlass} />
+            </SearchIcon>
           </SearchContainer>
-
           <ThemeBtn toggleTheme={toggleTheme} />
-        </div>
+        </ThemeButtonContainer>
       </Navbar>
-    </div>
+    </HeaderContainer>
   );
 }
 

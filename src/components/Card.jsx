@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-// Styled components
 const CardContainer = styled.div`
   border: 1px solid #d3d3d3;
   border-radius: 0.5rem;
@@ -64,13 +63,13 @@ const AuthorText = styled.span.attrs(({ darkMode }) => ({
 const Card = ({ cardData, darkMode }) => {
   return (
     <CardContainer>
-      <CardImage src={cardData.image} alt="Card visual" />
-      <CategoryButton>{cardData.category}</CategoryButton>
-      <Title darkMode={darkMode}>{cardData.title}</Title>
+      <CardImage src={cardData?.image} alt="Card visual" />
+      <CategoryButton>{cardData?.category}</CategoryButton>
+      <Title darkMode={darkMode}>{cardData?.title}</Title>
       <AuthorDetails>
-        <AuthorImage src={cardData.authorImage} alt={cardData.authorName} />
-        <AuthorText darkMode={darkMode}>{cardData.authorName}</AuthorText>
-        <AuthorText darkMode={darkMode}>{cardData.date}</AuthorText>
+        <AuthorImage src={cardData?.authorImage} alt={cardData?.authorName} />
+        <AuthorText darkMode={darkMode}>{cardData?.authorName}</AuthorText>
+        <AuthorText darkMode={darkMode}>{cardData?.date}</AuthorText>
       </AuthorDetails>
     </CardContainer>
   );
