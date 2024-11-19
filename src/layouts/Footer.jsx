@@ -1,7 +1,6 @@
 import { CiMail } from "react-icons/ci";
 import styled from "styled-components";
 
-// Styled Components
 const FooterWrapper = styled.div`
   background-color: ${({ theme }) =>
     theme === "dark" ? "#0c0c0c" : "#F6F6F7"};
@@ -156,7 +155,6 @@ function Footer() {
   return (
     <FooterWrapper>
       <GridContainer>
-        {/* Column 1: About */}
         <FooterColumn>
           <Title>About</Title>
           <Text>
@@ -172,7 +170,6 @@ function Footer() {
           </InfoText>
         </FooterColumn>
 
-        {/* Column 2: Quick Links & Category */}
         <div>
           <LinksColumn>
             <Title>Quick Links</Title>
