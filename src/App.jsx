@@ -9,8 +9,21 @@ import Contact from "./pages/Contact";
 import SignUp from "./pages/Signup";
 import Login from "./pages/Login";
 import ProtectedLayout from "./components/ProtectedLayout";
-import { ThemeProvider } from "./contexts/ThemeContext";
-import { useEffect, useState } from "react";
+import { ThemeProvider } from "styled-components";
+import { useToggleTheme } from "./contexts/ToggleThemeContext";
+export const lightTheme = {
+  background: "#ffffff",
+  text: "#000000",
+  border: "#e8e8ea",
+  primary: "#007bff",
+};
+
+export const darkTheme = {
+  background: "#2c3e50",
+  text: "#ecf0f1",
+  border: "#242535",
+  primary: "#0056b3",
+};
 
 function App() {
   const router = createBrowserRouter([
@@ -40,22 +53,12 @@ function App() {
     },
   ]);
 
-  const [themeMode, setThemeMode] = useState("light");
-
-  const darkTheme = () => setThemeMode("dark");
-  const lightTheme = () => setThemeMode("light");
-
-  useEffect(() => {
-    document.querySelector("html").classList.remove("light", "dark");
-    document.querySelector("html").classList.add(themeMode);
-  }, [themeMode]);
+  const { darkMode } = useToggleTheme();
 
   return (
-    <div className="bg-white dark:bg-black">
-      <ThemeProvider value={{ themeMode, darkTheme, lightTheme }}>
-        <RouterProvider router={router} />
-      </ThemeProvider>
-    </div>
+    <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+      <RouterProvider router={router} />
+    </ThemeProvider>
   );
 }
 

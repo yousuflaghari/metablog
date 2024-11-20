@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-// Styled Components
 const Wrapper = styled.div`
   width: 100%;
   max-width: 900px;
@@ -9,8 +8,8 @@ const Wrapper = styled.div`
 `;
 
 const Button = styled.button`
-  background-color: blue;
-  color: white;
+  background-color: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.text};
   padding: 0.5rem 1rem;
   border-radius: 0.375rem;
   font-size: 0.75rem;
@@ -21,7 +20,7 @@ const Title = styled.h1`
   font-size: 2rem;
   font-family: sans-serif;
   font-weight: bold;
-  color: black;
+  color: ${(props) => props.theme.text};
   margin-bottom: 1rem;
   line-height: 1.25;
   transition: 0.2s;
@@ -50,7 +49,7 @@ const MetaImage = styled.img`
 `;
 
 const MetaText = styled.span`
-  color: rgba(0, 0, 0, 0.5);
+  color: ${(props) => props.theme.text};
   font-size: 0.75rem;
   margin-right: 1rem;
 
@@ -61,7 +60,7 @@ const MetaText = styled.span`
 
 const Paragraph = styled.p`
   font-size: 1.125rem;
-  color: #3b3c4a;
+  color: ${(props) => props.theme.text};
   margin-top: 1.25rem;
   font-family: serif;
 
@@ -76,7 +75,7 @@ const Section = styled.div`
 `;
 
 const QuoteBox = styled.div`
-  background-color: #f6f6f7;
+  background-color: ${(props) => props.theme.background};
   border-left: 4px solid #e8e8ea;
   padding: 1rem;
   border-radius: 1rem;
@@ -85,7 +84,7 @@ const QuoteBox = styled.div`
 `;
 
 const QuoteText = styled.q`
-  color: black;
+  color: ${(props) => props.theme.text};
   font-size: 1.125rem;
   font-family: serif;
   font-style: italic;
@@ -103,7 +102,7 @@ const Image = styled.img`
 const Subtitle = styled.h2`
   font-size: 1.25rem;
   font-weight: bold;
-  color: #181a2a;
+  color: ${(props) => props.theme.text};
   font-family: sans-serif;
   margin-top: 2.5rem;
 `;

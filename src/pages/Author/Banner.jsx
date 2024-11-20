@@ -41,19 +41,19 @@ const NameText = styled.p`
   font-family: sans-serif;
   font-weight: 600;
   font-size: 16px;
-  color: ${({ theme }) => (theme === "dark" ? "white" : "black")};
+  color: ${(props) => props.theme.text};
 `;
 
 const RoleText = styled.p`
   font-family: sans-serif;
   font-size: 16px;
-  color: ${({ theme }) => (theme === "dark" ? "white" : "#8a8a8a")};
+  color: ${(props) => props.theme.text};
 `;
 
 const DescriptionText = styled.p`
   text-align: center;
   font-size: 16px;
-  color: ${({ theme }) => (theme === "dark" ? "white" : "#3b3c4a")};
+  color: ${(props) => props.theme.text};
 `;
 
 const SocialIcons = styled.div`

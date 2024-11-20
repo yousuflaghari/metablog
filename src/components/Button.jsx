@@ -22,7 +22,6 @@ function Button({
   textColor = "black",
   darkMode = false,
   className = "",
-  ...props
 }) {
   return (
     <StyledButton
@@ -31,7 +30,6 @@ function Button({
       textColor={textColor}
       darkMode={darkMode}
       className={className}
-      {...props}
     >
       {children}
     </StyledButton>

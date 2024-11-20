@@ -11,7 +11,7 @@ const Navbar = styled.nav`
   flex-direction: column;
   padding-top: 96px;
   padding-bottom: 32px;
-  background-color: ${(props) => (props.darkMode ? "#0c0c0c" : "#ffffff")};
+  background-color: ${(props) => props.theme.background};
   justify-content: space-between;
   align-items: center;
   position: relative;
@@ -27,7 +27,7 @@ const Navbar = styled.nav`
 const Navlink = styled(Link)`
   text-decoration: none;
   font-size: 18px;
-  color: ${(props) => (props.darkMode ? "#ffffff" : "#000000")};
+  color: ${(props) => props.theme.text};
 `;
 
 const LogoContainer = styled.div`
@@ -40,7 +40,7 @@ const LogoContainer = styled.div`
 
   h2 {
     font-size: 28px;
-    color: ${(props) => (props.darkMode ? "#ffffff" : "#000000")};
+    color: ${(props) => props.theme.text};
     span {
       font-weight: bold;
     }
@@ -60,8 +60,9 @@ const Menu = styled.ul`
   justify-content: center;
   position: absolute;
   padding: 0px;
+  list-style-type: none;
   top: 128px;
-  background-color: ${(props) => (props.darkMode ? "#0c0c0c" : "#87ceeb")};
+  background-color: ${(props) => props.theme.background};
   border-radius: 0 0 12px 12px;
 
   @media (min-width: 768px) {
@@ -76,7 +77,7 @@ const Menu = styled.ul`
 
 const MenuItem = styled.li`
   font-size: 20px;
-  color: ${(props) => (props.active ? "#000000" : "#ffffff")};
+  color: ${(props) => props.theme.text};
 `;
 
 const SearchContainer = styled.div`
@@ -86,9 +87,9 @@ const SearchContainer = styled.div`
   display: flex;
   padding: 0px;
   align-items: center;
-  border: 1px solid ${(props) => (props.darkMode ? "#ffffff" : "#000000")};
+  border: 1px solid ${(props) => props.theme.text};
   border-radius: 8px;
-  background-color: ${(props) => (props.darkMode ? "#333333" : "#f6f6f7")};
+  background-color: ${(props) => props.theme.background};
 `;
 
 const SearchInput = styled.input`
@@ -98,14 +99,14 @@ const SearchInput = styled.input`
   border-radius: 8px;
   padding: 12px;
   background-color: transparent;
-  color: ${(props) => (props.darkMode ? "#ffffff" : "#000000")};
+  color: ${(props) => props.theme.text};
   outline: none;
 `;
 
 const SearchIcon = styled.div`
   position: absolute;
   right: 12px;
-  color: ${(props) => (props.darkMode ? "#ffffff" : "#999999")};
+  color: ${(props) => props.theme.text};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -133,58 +134,42 @@ const ThemeButtonContainer = styled.div`
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false);
-  const [darkMode, setDarkMode] = useState(false);
-
-  const toggleTheme = () => {
-    setDarkMode(!darkMode);
-    setIsOpen(!isOpen);
-  };
 
   return (
     <HeaderContainer>
-      <Navbar darkMode={darkMode}>
-        <LogoContainer darkMode={darkMode}>
+      <Navbar>
+        <LogoContainer>
           <img src={`/images/Logo.png`} alt="Logo" className="w-10" />
           <h2>
             Meta<span>Blog</span>
           </h2>
         </LogoContainer>
-        <Menu isOpen={isOpen} darkMode={darkMode}>
+        <Menu isOpen={isOpen}>
           <MenuItem>
-            <Navlink to="/" darkMode={darkMode} active={false}>
-              Home
-            </Navlink>
+            <Navlink to="/">Home</Navlink>
           </MenuItem>
           <MenuItem>
-            <Navlink to="/blog" darkMode={darkMode} active={false}>
-              Blog
-            </Navlink>
+            <Navlink to="/blog">Blog</Navlink>
           </MenuItem>
           <MenuItem>
-            <Navlink to="/single-post" darkMode={darkMode} active={false}>
-              Single Post
-            </Navlink>
+            <Navlink to="/single-post">Single Post</Navlink>
           </MenuItem>
           <MenuItem>
-            <Navlink to="/pages" darkMode={darkMode} active={false}>
-              Pages
-            </Navlink>
+            <Navlink to="/pages">Pages</Navlink>
           </MenuItem>
           <MenuItem>
-            <Navlink to="/contact" darkMode={darkMode} active={false}>
-              Contact
-            </Navlink>
+            <Navlink to="/contact">Contact</Navlink>
           </MenuItem>
         </Menu>
 
         <ThemeButtonContainer>
-          <SearchContainer darkMode={darkMode}>
-            <SearchInput darkMode={darkMode} placeholder="Search..." />
-            <SearchIcon darkMode={darkMode}>
+          <SearchContainer>
+            <SearchInput placeholder="Search..." />
+            <SearchIcon>
               <FontAwesomeIcon icon={faMagnifyingGlass} />
             </SearchIcon>
           </SearchContainer>
-          <ThemeBtn toggleTheme={toggleTheme} />
+          <ThemeBtn />
         </ThemeButtonContainer>
       </Navbar>
     </HeaderContainer>

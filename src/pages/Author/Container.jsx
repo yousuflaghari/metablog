@@ -28,7 +28,7 @@ function Container() {
       <Title>Latest Post</Title>
       <CardsGrid>
         {Carddata.map((card, index) => (
-          <Card key={index} cardData={card} darkMode={false} />
+          <Card key={index} cardData={card} />
         ))}
       </CardsGrid>
     </ContainerWrapper>

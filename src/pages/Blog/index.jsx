@@ -2,9 +2,11 @@ import styled from "styled-components";
 import Banner from "./Banner";
 import Container from "./Container";
 
-// Styled Components
 const BlogWrapper = styled.div`
   display: flex;
+  background-color: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.text};
+
   flex-direction: column;
   align-items: center;
   gap: 8px;
@@ -34,6 +36,8 @@ const BreadcrumbItem = styled.li`
 const BannerWrapper = styled.div`
   padding-left: 1.5rem;
   padding-right: 1.5rem;
+  color: ${(props) => props.theme.text};
+  background-color: ${(props) => props.theme.background};
   margin-top: 3rem;
   margin-bottom: 3rem;
   position: relative;

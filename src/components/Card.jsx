@@ -1,13 +1,16 @@
 import styled from "styled-components";
 
 const CardContainer = styled.div`
-  border: 1px solid #d3d3d3;
+  background-color: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.text};
   border-radius: 0.5rem;
   padding: 0.5rem;
   width: 300px;
+  border: ${(props) => props.theme.border};
 
   @media (min-width: 640px) {
-    width: 100%;
+    border: ${(props) => props.theme.border};
+    width: 95%;
   }
 `;
 
@@ -18,8 +21,8 @@ const CardImage = styled.img`
 `;
 
 const CategoryButton = styled.button`
-  background-color: rgba(211, 211, 211, 0.2);
-  color: #007bff;
+  background-color: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.text};
   padding: 0.25rem 0.5rem;
   border-radius: 0.25rem;
   font-size: 0.75rem;
@@ -32,7 +35,7 @@ const Title = styled.h1.attrs(({ darkMode }) => ({
   darkMode,
 }))`
   font-size: 20px;
-  color: ${(props) => (props.darkMode ? "white" : "black")};
+  color: ${(props) => props.theme.text};
   font-weight: bold;
   line-height: 1.3;
   margin-bottom: 0.75rem;
@@ -55,7 +58,7 @@ const AuthorText = styled.span.attrs(({ darkMode }) => ({
   darkMode,
 }))`
   font-size: 0.875rem;
-  color: ${(props) => (props.darkMode ? "white" : "black")};
+  color: ${(props) => props.theme.text};
   opacity: 0.5;
   transition: color 0.2s, opacity 0.2s;
 `;

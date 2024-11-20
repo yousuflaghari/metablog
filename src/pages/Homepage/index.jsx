@@ -18,7 +18,7 @@ const BannerWrapper = styled.div`
 `;
 
 const BannerContent = styled.div`
-  background-color: white;
+  background-color: ${(props) => props.theme.background};
   border-radius: 1rem;
   padding: 0.5rem;
   position: absolute;
@@ -27,22 +27,17 @@ const BannerContent = styled.div`
   width: 80%;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
   transition: 0.2s;
+
   @media (min-width: 640px) {
     width: 20rem;
     left: 5rem;
     padding: 1.5rem;
   }
-
-  @media (prefers-color-scheme: dark) {
-    background-color: black;
-    box-shadow: none;
-    border: 1px solid white;
-  }
 `;
 
 const CategoryButton = styled.button`
-  background-color: blue;
-  color: white;
+  background-color: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.text};
   padding: 0.5rem 1rem;
   border-radius: 0.375rem;
   font-size: 12px;
@@ -52,15 +47,11 @@ const CategoryButton = styled.button`
 const BannerTitle = styled.h1`
   font-size: 20px;
   font-weight: bold;
-  color: black;
+  color: ${(props) => props.theme.text};
   margin-bottom: 1rem;
 
   @media (min-width: 640px) {
     font-size: 28px;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    color: white;
   }
 `;
 
@@ -73,24 +64,18 @@ const Author = styled.span`
   margin-right: 1rem;
   font-size: 12px;
   color: rgba(255, 255, 255, 0.5);
+
   @media (min-width: 640px) {
     font-size: 16px;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    color: rgba(255, 255, 255, 0.5);
   }
 `;
 
 const Date = styled.span`
   font-size: 12px;
   color: rgba(255, 255, 255, 0.5);
+
   @media (min-width: 640px) {
     font-size: 16px;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    color: rgba(255, 255, 255, 0.5);
   }
 `;
 

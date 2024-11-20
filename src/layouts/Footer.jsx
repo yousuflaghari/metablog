@@ -1,10 +1,10 @@
 import { CiMail } from "react-icons/ci";
 import styled from "styled-components";
+import { useToggleTheme } from "../contexts/ToggleThemeContext";
 
 const FooterWrapper = styled.div`
-  background-color: ${({ theme }) =>
-    theme === "dark" ? "#0c0c0c" : "#F6F6F7"};
-  padding: 1.5rem 0;
+  background-color: ${(props) => props.theme.background};
+  padding: 20px;
 `;
 
 const GridContainer = styled.div`
@@ -26,14 +26,14 @@ const GridContainer = styled.div`
 const FooterColumn = styled.div``;
 
 const Title = styled.h4`
-  color: ${({ theme }) => (theme === "dark" ? "white" : "black")};
+  color: ${(props) => props.theme.text};
   font-size: 1.125rem;
   font-weight: 600;
   margin-bottom: 0.75rem;
 `;
 
 const Text = styled.p`
-  color: ${({ theme }) => (theme === "dark" ? "white" : "black")};
+  color: ${(props) => props.theme.text};
   font-size: 1rem;
   opacity: 0.5;
   line-height: 1.5;
@@ -41,7 +41,7 @@ const Text = styled.p`
 `;
 
 const InfoText = styled.p`
-  color: ${({ theme }) => (theme === "dark" ? "white" : "black")};
+  color: ${(props) => props.theme.text};
   font-size: 1rem;
   font-weight: 600;
 `;
@@ -51,10 +51,12 @@ const InfoSpan = styled.span`
   opacity: 0.9;
 `;
 
-const LinksColumn = styled.div``;
+const LinksColumn = styled.div`
+  list-style-type: none;
+`;
 
 const LinkItem = styled.li`
-  color: ${({ theme }) => (theme === "dark" ? "white" : "black")};
+  color: ${(props) => props.theme.text};
   font-size: 1rem;
   font-weight: normal;
   opacity: 0.9;
@@ -62,11 +64,10 @@ const LinkItem = styled.li`
 `;
 
 const NewsletterWrapper = styled.div`
-  background-color: ${({ theme }) => (theme === "dark" ? "#0c0c0c" : "white")};
-  border: ${({ theme }) =>
-    theme === "dark" ? "1px solid white" : "1px solid #ddd"};
+  background-color: ${(props) => props.theme.background};
+  border: ${(props) => props.theme.background};
   border-radius: 0.75rem;
-  padding: 1rem 1.5rem;
+  padding: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -77,18 +78,21 @@ const NewsletterWrapper = styled.div`
 
 const InputWrapper = styled.div`
   position: relative;
-  width: 100%;
+  width: 307px;
+  border-radius: 6px;
   margin-bottom: 1rem;
+  padding-right: 10px;
+  border: 1px solid #9e9c9c;
 `;
 
 const EmailInput = styled.input`
-  padding-left: 1rem;
   padding-right: 2.5rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
-  width: 100%;
+  width: 72%;
   font-size: 1rem;
-  border: 1px solid #ccc;
+  border: 1px solid
+    ${({ isDarkMode }) => (isDarkMode ? "transparent" : "transparent")};
   border-radius: 0.375rem;
   background-color: transparent;
   &:focus {
@@ -121,13 +125,13 @@ const LogoImage = styled.img`
 `;
 
 const MetaText = styled.h2`
-  color: ${({ theme }) => (theme === "dark" ? "white" : "black")};
+  color: ${(props) => props.theme.text};
   font-size: 1.25rem;
   font-family: sans-serif;
 `;
 
 const MetaSubtitle = styled.p`
-  color: ${({ theme }) => (theme === "dark" ? "white" : "black")};
+  color: ${(props) => props.theme.text};
   font-size: 1rem;
   opacity: 0.5;
 `;
@@ -139,7 +143,7 @@ const FooterLinks = styled.ul`
 `;
 
 const FooterLinkItem = styled.li`
-  color: ${({ theme }) => (theme === "dark" ? "white" : "black")};
+  color: ${(props) => props.theme.text};
   font-size: 1rem;
   font-weight: normal;
   opacity: 0.9;
@@ -148,10 +152,26 @@ const FooterLinkItem = styled.li`
 const Hr = styled.hr`
   margin-top: 1.5rem;
   border: 0;
-  border-top: 1px solid ${({ theme }) => (theme === "dark" ? "#333" : "#ccc")};
+  border-top: ${(props) => props.theme.background};
 `;
-
+const PagesLink = styled.ul`
+  list-style-type: none;
+  padding: 0px;
+`;
+const Otherlink = styled.ul`
+  list-style-type: none;
+  padding: 0px;
+`;
+const Linkcontainer = styled.div`
+  display: flex;
+  gap: 80px;
+`;
+const Privacycontainer = styled.div`
+  padding-left: 20px;
+`;
 function Footer() {
+  const { darkMode } = useToggleTheme();
+
   return (
     <FooterWrapper>
       <GridContainer>
@@ -170,41 +190,38 @@ function Footer() {
           </InfoText>
         </FooterColumn>
 
-        <div>
+        <Linkcontainer>
           <LinksColumn>
             <Title>Quick Links</Title>
-            <ul>
+            <PagesLink>
               <LinkItem>Home</LinkItem>
               <LinkItem>About</LinkItem>
               <LinkItem>Blog</LinkItem>
               <LinkItem>Archived</LinkItem>
               <LinkItem>Author</LinkItem>
               <LinkItem>Contact</LinkItem>
-            </ul>
+            </PagesLink>
           </LinksColumn>
 
           <LinksColumn>
             <Title>Category</Title>
-            <ul>
+            <Otherlink>
               <LinkItem>Lifestyle</LinkItem>
               <LinkItem>Technology</LinkItem>
               <LinkItem>Travel</LinkItem>
               <LinkItem>Business</LinkItem>
               <LinkItem>Economy</LinkItem>
               <LinkItem>Sports</LinkItem>
-            </ul>
+            </Otherlink>
           </LinksColumn>
-        </div>
+        </Linkcontainer>
 
-        {/* Column 3: Newsletter */}
         <NewsletterWrapper>
           <h3>Weekly Newsletter</h3>
           <Text>Get blog articles and offers via email</Text>
           <InputWrapper>
             <EmailInput type="email" placeholder="Your email" />
-            <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-              <CiMail className="w-5 h-5 text-gray-500" />
-            </div>
+            <CiMail className="w-5 h-5 text-gray-500" />
           </InputWrapper>
           <SubmitButton>Subscribe</SubmitButton>
         </NewsletterWrapper>
@@ -212,7 +229,7 @@ function Footer() {
 
       <Hr />
 
-      <div>
+      <Privacycontainer>
         <LogoWrapper>
           <LogoImage src={`/images/Logo.png`} alt="Logo" />
           <div>
@@ -230,7 +247,7 @@ function Footer() {
           <FooterLinkItem>Privacy Policy</FooterLinkItem>
           <FooterLinkItem>Cookie Policy</FooterLinkItem>
         </FooterLinks>
-      </div>
+      </Privacycontainer>
     </FooterWrapper>
   );
 }

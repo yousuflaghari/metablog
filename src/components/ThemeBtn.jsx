@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import useTheme from "../contexts/ThemeContext";
+import { useToggleTheme } from "../contexts/ToggleThemeContext";
 
 const SwitchWrapper = styled.div`
   display: inline-block;
@@ -18,50 +18,40 @@ const HiddenCheckbox = styled.input`
 const SwitchTrack = styled.div`
   width: 2.75rem;
   height: 1.5rem;
-  background-color: ${({ theme }) =>
-    theme === "dark" ? "#4B5563" : "#E5E7EB"};
+  background-color: ${({ theme }) => theme.background};
   border-radius: 9999px;
   position: relative;
+  border: 1px solid;
   transition: background-color 0.3s ease;
 `;
 
 const SwitchBall = styled.div`
-  content: "";
   position: absolute;
   top: 2px;
-  left: 2px;
+  left: ${({ isDarkMode }) => (isDarkMode ? "20px" : "2px")};
   width: 1.25rem;
   height: 1.25rem;
-  background-color: white;
+  background-color: ${({ theme }) => theme.text};
   border-radius: 9999px;
   transition: transform 0.3s ease;
-  border: 1px solid ${({ theme }) => (theme === "dark" ? "#4B5563" : "#D1D5DB")};
-  transform: ${({ isChecked }) =>
-    isChecked ? "translateX(1.25rem)" : "translateX(0)"};
+
+  border: 1px solid ${({ theme }) => theme.border};
 `;
 
-const ThemeBtn = ({ className = "" }) => {
-  const { themeMode, lightTheme, darkTheme } = useTheme();
-
-  const onChangeBtn = (e) => {
-    const darkModeStatus = e.currentTarget.checked;
-    if (darkModeStatus) {
-      darkTheme();
-    } else {
-      lightTheme();
-    }
-  };
+const ThemeBtn = () => {
+  const { darkMode, toggleDarkMode } = useToggleTheme();
 
   return (
-    <SwitchWrapper className={className}>
+    <SwitchWrapper>
       <SwitchLabel>
         <HiddenCheckbox
           type="checkbox"
-          onChange={onChangeBtn}
-          checked={themeMode === "dark"}
+          onChange={toggleDarkMode}
+          checked={darkMode}
+          value={darkMode}
         />
-        <SwitchTrack theme={themeMode}>
-          <SwitchBall isChecked={themeMode === "dark"} />
+        <SwitchTrack>
+          <SwitchBall isDarkMode={darkMode} />
         </SwitchTrack>
       </SwitchLabel>
     </SwitchWrapper>
