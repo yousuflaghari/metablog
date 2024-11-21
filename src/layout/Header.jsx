@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import ThemeBtn from "../components/ThemeBtn";
 import styled from "styled-components";
@@ -133,8 +132,6 @@ const ThemeButtonContainer = styled.div`
 `;
 
 function Header() {
-  const [isOpen, setIsOpen] = useState(false);
-
   return (
     <HeaderContainer>
       <Navbar>
@@ -144,7 +141,7 @@ function Header() {
             Meta<span>Blog</span>
           </h2>
         </LogoContainer>
-        <Menu isOpen={isOpen}>
+        <Menu>
           <MenuItem>
             <Navlink to="/">Home</Navlink>
           </MenuItem>

@@ -1,6 +1,4 @@
-import { CiMail } from "react-icons/ci";
 import styled from "styled-components";
-import { useToggleTheme } from "../contexts/ToggleThemeContext";
 
 const FooterWrapper = styled.div`
   background-color: ${(props) => props.theme.background};
@@ -92,7 +90,7 @@ const EmailInput = styled.input`
   width: 72%;
   font-size: 1rem;
   border: 1px solid
-    ${({ isDarkMode }) => (isDarkMode ? "transparent" : "transparent")};
+    ${({ darkMode }) => (darkMode ? "transparent" : "transparent")};
   border-radius: 0.375rem;
   background-color: transparent;
   &:focus {
@@ -170,8 +168,6 @@ const Privacycontainer = styled.div`
   padding-left: 20px;
 `;
 function Footer() {
-  const { darkMode } = useToggleTheme();
-
   return (
     <FooterWrapper>
       <GridContainer>
@@ -221,7 +217,6 @@ function Footer() {
           <Text>Get blog articles and offers via email</Text>
           <InputWrapper>
             <EmailInput type="email" placeholder="Your email" />
-            <CiMail className="w-5 h-5 text-gray-500" />
           </InputWrapper>
           <SubmitButton>Subscribe</SubmitButton>
         </NewsletterWrapper>
