@@ -18,10 +18,10 @@ const StyledLabel = styled.label`
 `;
 
 const StyledInput = styled.input`
-  padding: 0.5rem 0.75rem;
+  padding: 8px 12px;
   border: none;
   border-radius: 0.5rem;
-  width: 100%;
+  width: 95%;
   color: ${({ darkMode }) => (darkMode ? "white" : "black")};
   background-color: ${({ darkMode }) => (darkMode ? "white" : "#f0f0f0")};
   outline: none;

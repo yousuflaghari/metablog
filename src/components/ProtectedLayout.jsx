@@ -1,8 +1,8 @@
-import { Outlet } from "react-router-dom";
-import { Navigate } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
+import { getFromLocalStorage } from "../utils";
 
 function ProtectedLayout() {
-  const user = true;
+  const user = getFromLocalStorage("user");
 
   return user ? <Outlet /> : <Navigate to="/login" />;
 }

@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
@@ -26,14 +27,6 @@ const Title = styled.h1`
   transition: 0.2s;
 
   @media (min-width: 640px) {
-    font-size: 2.5rem;
-  }
-
-  @media (min-width: 768px) {
-    font-size: 2.5rem;
-  }
-
-  @media (min-width: 1024px) {
     font-size: 2.5rem;
   }
 `;
@@ -108,31 +101,43 @@ const Subtitle = styled.h2`
 `;
 
 const Container = () => {
+  const [category, setCategory] = useState("");
+  const [userName, setUserName] = useState("");
+  const [content, setContent] = useState({
+    title: "",
+    text: "",
+  });
+
+  useEffect(() => {
+    // Retrieve values from localStorage
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    const storedblog = JSON.parse(localStorage.getItem("blogs"));
+    const { title, category, text } = storedblog[0];
+    setCategory(category);
+    setContent({
+      title: title,
+      text: text,
+    });
+    console.log(storedblog[0].title);
+    setUserName(storedUser.user.name);
+  }, []);
+
   return (
     <Wrapper>
       <div>
-        <Button>Technology</Button>
-        <Title>
-          The Impact of Technology on the Workplace: How Technology is Changing
-        </Title>
+        <Button>{category}</Button>
+        <Title>{content.title}</Title>
 
         <MetaInfo>
           <MetaImage src="/images/Image (7).png" alt="" />
-          <MetaText>Jason Francisco</MetaText>
+          <MetaText>{userName}</MetaText>
           <MetaText>October 22, 2024</MetaText>
         </MetaInfo>
       </div>
 
       <Section>
         <Image src="/images/Image (9).png" alt="" />
-        <Paragraph>
-          Traveling is an enriching experience that opens up new horizons,
-          exposes us to different cultures, and creates memories that last a
-          lifetime. However, traveling can also be stressful and overwhelming,
-          especially if you donot plan and prepare adequately. In this blog
-          article, we will explore tips and tricks for a memorable journey and
-          how to make the most of your travels.
-        </Paragraph>
+        <Paragraph>{content.text}</Paragraph>
         <Paragraph>
           One of the most rewarding aspects of traveling is immersing yourself
           in the local culture and customs. This includes trying local cuisine,
@@ -158,23 +163,6 @@ const Container = () => {
           faucibus vitae aliquet nec ullamcorper sit amet. Aenean euismod
           elementum nisi quis eleifend quam adipiscing vitae. Viverra adipiscing
           at in tellus.
-        </Paragraph>
-      </Section>
-
-      <Section>
-        <Subtitle>Plan Your Itinerary</Subtitle>
-        <Paragraph>
-          While it is essential to leave room for spontaneity and unexpected
-          adventures, having a rough itinerary can help you make the most of
-          your time and budget. Identify the must-see sights and experiences and
-          prioritize them according to your interests and preferences. This will
-          help you avoid overscheduling and ensure that you have time to relax
-          and enjoy your journey.
-        </Paragraph>
-        <Paragraph>
-          Vitae sapien pellentesque habitant morbi tristique. Luctus venenatis
-          lectus magna fringilla. Nec ullamcorper sit amet risus nullam eget
-          felis. Tincidunt arcu non sodales neque sodales ut etiam sit amet.
         </Paragraph>
       </Section>
 

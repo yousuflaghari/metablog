@@ -1,3 +1,5 @@
+import React, { useState } from "react";
+import axios from "axios";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import { Link } from "react-router-dom";
@@ -83,7 +85,6 @@ const SignInText = styled.p`
   font-weight: 600;
   font-family: sans-serif;
 
-  /* Dark mode styles */
   ${({ theme }) =>
     theme.mode === "dark" &&
     `
@@ -97,37 +98,100 @@ const SignInLink = styled(Link)`
 `;
 
 function FormComponent() {
+  const [formData, setFormData] = useState({
+    name: "",
+    user_name: "",
+    email: "",
+    password: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+    setSuccess("");
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/users",
+        formData
+      );
+      setSuccess("Account created successfully!");
+      setFormData({
+        name: "",
+        user_name: "",
+        email: "",
+        password: "",
+      });
+    } catch (err) {
+      setError(err.response?.data?.message || "An error occurred.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <FormWrapper>
       <Heading>Create An Account</Heading>
       <SubHeading>
         Create an account to enjoy all the services without any ads for free!
       </SubHeading>
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <Input
           label="Full Name"
+          name="name"
+          value={formData.name}
           placeholder="Enter Full Name"
           className="py-3"
+          onChange={handleChange}
         />
-        <Input label="Username" placeholder="Enter Username" className="py-3" />
+        <Input
+          label="Username"
+          name="user_name"
+          value={formData.user_name}
+          placeholder="Enter Username"
+          className="py-3"
+          onChange={handleChange}
+        />
         <Input
           label="Email"
+          name="email"
           type="email"
+          value={formData.email}
           placeholder="Enter Email"
           className="py-3"
+          onChange={handleChange}
         />
         <Input
           label="Password"
+          name="password"
           type="password"
+          value={formData.password}
           placeholder="Enter Password"
           className="py-3"
+          onChange={handleChange}
         />
         <SubmitButtonWrapper>
           <Button
-            children={"Create Account"}
+            type="submit"
+            disabled={loading}
             className="w-[200px] py-4 rounded-xl font-bold text-[20px]"
-          />
+          >
+            {loading ? "Creating..." : "Create Account"}
+          </Button>
         </SubmitButtonWrapper>
+        {error && <p style={{ color: "red", textAlign: "center" }}>{error}</p>}
+        {success && (
+          <p style={{ color: "green", textAlign: "center" }}>{success}</p>
+        )}
         <SignInText>
           Already Have An Account?{" "}
           <SignInLink to={"/login"}>Sign In</SignInLink>

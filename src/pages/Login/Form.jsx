@@ -1,7 +1,10 @@
+import React, { useState } from "react";
 import styled from "styled-components";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { setLocalStorage } from "../../utils/index"; // Import utility function
 
 // Styled Components
 const FormWrapper = styled.div`
@@ -11,22 +14,15 @@ const FormWrapper = styled.div`
   width: 100%;
   max-width: 500px;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
-  @media (prefers-color-scheme: dark) {
-    background-color: black;
-    border: 1px solid white;
-  }
 `;
 
 const Title = styled.h1`
   font-size: 24px;
   font-weight: bold;
   text-align: center;
-  color: black;
+  color: ${({ theme }) => (theme.mode === "dark" ? "white" : "black")};
   @media (min-width: 640px) {
     font-size: 36px;
-  }
-  @media (prefers-color-scheme: dark) {
-    color: white;
   }
 `;
 
@@ -35,12 +31,9 @@ const Description = styled.p`
   text-align: center;
   font-size: 18px;
   font-weight: 600;
-  color: black;
+  color: ${({ theme }) => (theme.mode === "dark" ? "white" : "black")};
   @media (min-width: 640px) {
     font-size: 20px;
-  }
-  @media (prefers-color-scheme: dark) {
-    color: white;
   }
 `;
 
@@ -61,10 +54,7 @@ const FormButtonWrapper = styled.div`
 const SignUpText = styled.p`
   text-align: center;
   font-weight: 600;
-  color: black;
-  @media (prefers-color-scheme: dark) {
-    color: white;
-  }
+  color: ${({ theme }) => (theme.mode === "dark" ? "white" : "black")};
 `;
 
 const SignUpLink = styled(Link)`
@@ -73,30 +63,81 @@ const SignUpLink = styled(Link)`
 `;
 
 const Formlogin = () => {
+  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+
+    try {
+      const response = await axios.post(
+        "http://localhost:5000/login",
+        formData
+      );
+
+      if (response.status === 200) {
+        // Save user data to local storage
+        setLocalStorage("user", response.data);
+
+        alert("Login successful");
+        console.log("User Data:", response.data);
+
+        // Navigate to dashboard or home page after successful login
+        navigate("/"); // Change to your desired page
+      } else {
+        setError("Invalid email or password");
+      }
+    } catch (err) {
+      setError(err.response?.data?.message || "Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <FormWrapper>
       <Title>Login</Title>
       <Description>Please enter your Login and your Password</Description>
-      <Form>
-        <Input label="Username" placeholder="Enter Username" className="py-3" />
+      <Form onSubmit={handleSubmit}>
         <Input
           label="Email"
           type="email"
+          name="email"
           placeholder="Enter Email"
           className="py-3"
+          value={formData.email}
+          onChange={handleInputChange}
+          required
         />
         <Input
           label="Password"
           type="password"
+          name="password"
           placeholder="Enter Password"
           className="py-3"
+          value={formData.password}
+          onChange={handleInputChange}
+          required
         />
         <FormButtonWrapper>
           <Button
-            children={"Login"}
+            type="submit"
             className="w-[150px] py-3 rounded-xl font-bold text-[20px]"
-          />
+            disabled={loading}
+          >
+            {loading ? "Logging in..." : "Login"}
+          </Button>
         </FormButtonWrapper>
+        {error && <p style={{ color: "red", textAlign: "center" }}>{error}</p>}
         <SignUpText>
           Not a member yet? <SignUpLink to={"/signUp"}>Sign Up</SignUpLink>
         </SignUpText>

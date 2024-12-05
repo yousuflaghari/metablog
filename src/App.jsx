@@ -11,6 +11,9 @@ import Login from "./pages/Login";
 import ProtectedLayout from "./components/ProtectedLayout";
 import { ThemeProvider } from "styled-components";
 import { useToggleTheme } from "./contexts/ToggleThemeContext";
+import ProfilePage from "./pages/Blog/Profilepage/profilepage";
+import BlogCreateForm from "./pages/Blog/blogcreateform/blogcreateform";
+
 export const lightTheme = {
   background: "#ffffff",
   text: "#000000",
@@ -34,6 +37,14 @@ function App() {
     {
       path: "/signUp",
       element: <SignUp />,
+    },
+    {
+      path: "/profile",
+      element: <ProfilePage />,
+    },
+    {
+      path: "/blog1",
+      element: <BlogCreateForm />,
     },
     {
       element: <ProtectedLayout />,

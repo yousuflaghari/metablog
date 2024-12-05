@@ -4,7 +4,8 @@ import ThemeBtn from "../../components/ThemeBtn";
 
 // Styled Components
 const LoginWrapper = styled.div`
-  background-color: skyblue;
+  background-color: ${(props) =>
+    props.theme.background}; /* Use theme's background */
   padding-top: 2.5rem;
   padding-bottom: 2.5rem;
   display: flex;
@@ -15,14 +16,8 @@ const LoginWrapper = styled.div`
   position: relative;
 
   @media (min-width: 640px) {
-    background-color: transparent;
     padding-top: 84.5px;
     padding-bottom: 86.5px;
-    background-color: black;
-  }
-
-  @media (prefers-color-scheme: dark) {
-    background-color: black;
   }
 `;
 

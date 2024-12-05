@@ -3,6 +3,7 @@ import ThemeBtn from "../components/ThemeBtn";
 import styled from "styled-components";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import LogoutButton from "../components/logout";
 
 const Navbar = styled.nav`
   display: flex;
@@ -168,6 +169,7 @@ function Header() {
           </SearchContainer>
           <ThemeBtn />
         </ThemeButtonContainer>
+        <LogoutButton />
       </Navbar>
     </HeaderContainer>
   );

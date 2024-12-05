@@ -1,11 +1,10 @@
-import Form from "./Form";
+import FormComponent from "./Form";
 import ThemeBtn from "../../components/ThemeBtn";
 import styled from "styled-components";
 
 // Styled components
 const SignUpWrapper = styled.div`
-  background-color: skyblue;
-  dark: bg-black;
+  background-color: ${(props) => props.theme.background};
   padding-top: 40px;
   padding-bottom: 40px;
   display: flex;
@@ -14,6 +13,7 @@ const SignUpWrapper = styled.div`
   padding-left: 8px;
   padding-right: 8px;
   position: relative;
+
   @media (min-width: 640px) {
     padding-top: 19.5px;
     padding-bottom: 21.5px;
@@ -26,6 +26,7 @@ const ThemeButtonWrapper = styled.div`
   position: absolute;
   top: 8px;
   right: 6px;
+
   @media (min-width: 640px) {
     top: 5px;
     right: 10px;
@@ -35,7 +36,7 @@ const ThemeButtonWrapper = styled.div`
 function SignUp() {
   return (
     <SignUpWrapper>
-      <Form />
+      <FormComponent />
       <ThemeButtonWrapper>
         <ThemeBtn />
       </ThemeButtonWrapper>
